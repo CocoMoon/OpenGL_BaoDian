@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01Simple", "01Simple\01Simp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02GLRect", "02GLRect\02GLRect.vcxproj", "{66770BD4-2CC4-4442-BEF9-D59B8ADA8F35}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03Bounce", "03Bounce\03Bounce.vcxproj", "{67582B7B-AF16-4513-9604-41A8FFEC9318}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +21,10 @@ Global
 		{66770BD4-2CC4-4442-BEF9-D59B8ADA8F35}.Debug|Win32.Build.0 = Debug|Win32
 		{66770BD4-2CC4-4442-BEF9-D59B8ADA8F35}.Release|Win32.ActiveCfg = Release|Win32
 		{66770BD4-2CC4-4442-BEF9-D59B8ADA8F35}.Release|Win32.Build.0 = Release|Win32
+		{67582B7B-AF16-4513-9604-41A8FFEC9318}.Debug|Win32.ActiveCfg = Debug|Win32
+		{67582B7B-AF16-4513-9604-41A8FFEC9318}.Debug|Win32.Build.0 = Debug|Win32
+		{67582B7B-AF16-4513-9604-41A8FFEC9318}.Release|Win32.ActiveCfg = Release|Win32
+		{67582B7B-AF16-4513-9604-41A8FFEC9318}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
