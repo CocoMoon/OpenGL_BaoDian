@@ -1,5 +1,5 @@
 #include "gl/freeglut.h"
-
+#include "stdio.h"
 #pragma comment(lib, "freeglut.lib")
 
 // Initial square position and size
@@ -122,6 +122,8 @@ int main(int argc, char* argv[])
 
 	SetupRC();
 
+	const char* str = (const char*)glGetString(GL_EXTENSIONS);
+	printf("%s", str);
 	glutMainLoop();
 
 	return 0;
