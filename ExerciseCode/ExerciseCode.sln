@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "11scissor", "11scissor\11sc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "12stencil", "12stencil\12stencil.vcxproj", "{41021759-92EB-4F04-A46F-A1D2091FD386}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "13Atom", "13Atom\13Atom.vcxproj", "{9C53AAD3-1D13-4D4B-B4E6-CEBF099BAE22}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -79,6 +81,10 @@ Global
 		{41021759-92EB-4F04-A46F-A1D2091FD386}.Debug|Win32.Build.0 = Debug|Win32
 		{41021759-92EB-4F04-A46F-A1D2091FD386}.Release|Win32.ActiveCfg = Release|Win32
 		{41021759-92EB-4F04-A46F-A1D2091FD386}.Release|Win32.Build.0 = Release|Win32
+		{9C53AAD3-1D13-4D4B-B4E6-CEBF099BAE22}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9C53AAD3-1D13-4D4B-B4E6-CEBF099BAE22}.Debug|Win32.Build.0 = Debug|Win32
+		{9C53AAD3-1D13-4D4B-B4E6-CEBF099BAE22}.Release|Win32.ActiveCfg = Release|Win32
+		{9C53AAD3-1D13-4D4B-B4E6-CEBF099BAE22}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
