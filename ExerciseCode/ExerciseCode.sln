@@ -27,6 +27,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "12stencil", "12stencil\12st
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "13Atom", "13Atom\13Atom.vcxproj", "{9C53AAD3-1D13-4D4B-B4E6-CEBF099BAE22}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "14Solar", "14Solar\14Solar.vcxproj", "{818B6C0C-1601-44C0-A190-7392A94A5297}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "15Transform", "15Transform\15Transform.vcxproj", "{E2DD65CC-3D60-4A28-A20A-CF36FE5B4E11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -85,6 +89,14 @@ Global
 		{9C53AAD3-1D13-4D4B-B4E6-CEBF099BAE22}.Debug|Win32.Build.0 = Debug|Win32
 		{9C53AAD3-1D13-4D4B-B4E6-CEBF099BAE22}.Release|Win32.ActiveCfg = Release|Win32
 		{9C53AAD3-1D13-4D4B-B4E6-CEBF099BAE22}.Release|Win32.Build.0 = Release|Win32
+		{818B6C0C-1601-44C0-A190-7392A94A5297}.Debug|Win32.ActiveCfg = Debug|Win32
+		{818B6C0C-1601-44C0-A190-7392A94A5297}.Debug|Win32.Build.0 = Debug|Win32
+		{818B6C0C-1601-44C0-A190-7392A94A5297}.Release|Win32.ActiveCfg = Release|Win32
+		{818B6C0C-1601-44C0-A190-7392A94A5297}.Release|Win32.Build.0 = Release|Win32
+		{E2DD65CC-3D60-4A28-A20A-CF36FE5B4E11}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E2DD65CC-3D60-4A28-A20A-CF36FE5B4E11}.Debug|Win32.Build.0 = Debug|Win32
+		{E2DD65CC-3D60-4A28-A20A-CF36FE5B4E11}.Release|Win32.ActiveCfg = Release|Win32
+		{E2DD65CC-3D60-4A28-A20A-CF36FE5B4E11}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
