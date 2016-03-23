@@ -1,57 +1,13 @@
 #include "gl/freeglut.h"
 #include "math3d.h"
-#include <math.h>
+#include "glFrame.h"
 
 #pragma comment(lib, "freeglut.lib")
 
+#define NUM_SPHERES      50
+GLFrame    spheres[NUM_SPHERES];
+GLFrame    frameCamera;
 
-// Draw a torus (doughnut), using the current 1D texture for light shading
-void DrawTorus(M3DMatrix44f mTransform)
-{
-	GLfloat majorRadius = 0.35f;
-	GLfloat minorRadius = 0.15f;
-	GLint   numMajor = 40;
-	GLint   numMinor = 20;
-	M3DVector3f objectVertex;         // Vertex in object/eye space
-	M3DVector3f transformedVertex;    // New Transformed vertex   
-	double majorStep = 2.0f*M3D_PI / numMajor;
-	double minorStep = 2.0f*M3D_PI / numMinor;
-	int i, j;
-
-	for (i=0; i<numMajor; ++i) 
-	{
-		double a0 = i * majorStep;
-		double a1 = a0 + majorStep;
-		GLfloat x0 = (GLfloat) cos(a0);
-		GLfloat y0 = (GLfloat) sin(a0);
-		GLfloat x1 = (GLfloat) cos(a1);
-		GLfloat y1 = (GLfloat) sin(a1);
-
-		glBegin(GL_TRIANGLE_STRIP);
-		for (j=0; j<=numMinor; ++j) 
-		{
-			double b = j * minorStep;
-			GLfloat c = (GLfloat) cos(b);
-			GLfloat r = minorRadius * c + majorRadius;
-			GLfloat z = minorRadius * (GLfloat) sin(b);
-
-			// First point
-			objectVertex[0] = x0*r;
-			objectVertex[1] = y0*r;
-			objectVertex[2] = z;
-			m3dTransformVector3(transformedVertex, objectVertex, mTransform);
-			glVertex3fv(transformedVertex);
-
-			// Second point
-			objectVertex[0] = x1*r;
-			objectVertex[1] = y1*r;
-			objectVertex[2] = z;
-			m3dTransformVector3(transformedVertex, objectVertex, mTransform);
-			glVertex3fv(transformedVertex);
-		}
-		glEnd();
-	}
-}
 // Draw a torus (doughnut)  at z = fZVal... torus is in xy plane
 void gltDrawTorus(GLfloat majorRadius, GLfloat minorRadius, GLint numMajor, GLint numMinor)
 {
@@ -97,42 +53,118 @@ void gltDrawTorus(GLfloat majorRadius, GLfloat minorRadius, GLint numMajor, GLin
 		glEnd();
 	}
 }
+        
+//////////////////////////////////////////////////////////////////
+// This function does any needed initialization on the rendering
+// context. 
+void SetupRC()
+{
+	int iSphere;
+
+	// Bluish background
+	glClearColor(0.0f, 0.0f, .50f, 1.0f );
+
+	// Draw everything as wire frame
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	// Randomly place the sphere inhabitants
+	for(iSphere = 0; iSphere < NUM_SPHERES; iSphere++)
+	{
+		// Pick a random location between -20 and 20 at .1 increments
+		float x = ((float)((rand() % 400) - 200) * 0.1f);
+		float z = (float)((rand() % 400) - 200) * 0.1f;
+		spheres[iSphere].SetOrigin(x, 0.0f, z);
+	}
+}
+
+
+///////////////////////////////////////////////////////////
+// Draw a gridded ground
+void DrawGround(void)
+{
+	GLfloat fExtent = 20.0f;
+	GLfloat fStep = 1.0f;
+	GLfloat y = -0.4f;
+	GLint iLine;
+
+	glBegin(GL_LINES);
+	for(iLine = -fExtent; iLine <= fExtent; iLine += fStep)
+	{
+		glVertex3f(iLine, y, fExtent);    // Draw Z lines
+		glVertex3f(iLine, y, -fExtent);
+
+		glVertex3f(fExtent, y, iLine);
+		glVertex3f(-fExtent, y, iLine);
+	}
+
+	glEnd();
+}
+
 
 // Called to draw scene
 void RenderScene(void)
 {
-	M3DMatrix44f   transformationMatrix;   // Storeage for rotation matrix
+	int i;
 	static GLfloat yRot = 0.0f;         // Rotation angle for animation
 	yRot += 0.5f;
 
 	// Clear the window with current clearing color
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// Build a rotation matrix
-	m3dRotationMatrix44(transformationMatrix, m3dDegToRad(yRot), 0.0f, 1.0f, 0.0f);
-	transformationMatrix[12] = 0.0f;
-	transformationMatrix[13] = 0.0f;
-	transformationMatrix[14] = -2.5f;
-	
-	//DrawTorus(transformationMatrix);
+	glPushMatrix();
+	frameCamera.ApplyCameraTransform();
 
-	glLoadMatrixf(transformationMatrix);
-	gltDrawTorus(0.35f, 0.15f, 40, 20);
+	// Draw the ground
+	DrawGround();
+
+	// Draw the randomly located spheres
+	for(i = 0; i < NUM_SPHERES; i++)
+	{
+		glPushMatrix();
+		spheres[i].ApplyActorTransform();
+		glutSolidSphere(0.1f, 13, 26);
+		glPopMatrix();
+	}
+
+	glPushMatrix();
+	glTranslatef(0.0f, 0.0f, -2.5f);
+
+	glPushMatrix();
+	glRotatef(-yRot * 2.0f, 0.0f, 1.0f, 0.0f);
+	glTranslatef(1.0f, 0.0f, 0.0f);
+	glutSolidSphere(0.1f, 13, 26);
+	glPopMatrix();
+
+	glRotatef(yRot, 0.0f, 1.0f, 0.0f);
+	gltDrawTorus(0.35, 0.15, 40, 20);
+	glPopMatrix();
+	glPopMatrix();
 
 	// Do the buffer Swap
 	glutSwapBuffers();
 }
 
-// This function does any needed initialization on the rendering
-// context. 
-void SetupRC()
-{
-	// Bluish background
-	glClearColor(0.0f, 0.0f, .50f, 1.0f );
 
-	// Draw everything as wire frame
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+// Respond to arrow keys by moving the camera frame of reference
+void SpecialKeys(int key, int x, int y)
+{
+	if(key == GLUT_KEY_UP)
+		frameCamera.MoveForward(0.1f);
+
+	if(key == GLUT_KEY_DOWN)
+		frameCamera.MoveForward(-0.1f);
+
+	if(key == GLUT_KEY_LEFT)
+		frameCamera.RotateLocalY(0.1f);
+
+	if(key == GLUT_KEY_RIGHT)
+		frameCamera.RotateLocalY(-0.1f);
+
+	// Refresh the Window
+	glutPostRedisplay();
 }
+
 
 ///////////////////////////////////////////////////////////
 // Called by GLUT library when idle (window not being
@@ -141,10 +173,8 @@ void TimerFunction(int value)
 {
 	// Redraw the scene with new coordinates
 	glutPostRedisplay();
-	glutTimerFunc(33,TimerFunction, 1);
+	glutTimerFunc(3,TimerFunction, 1);
 }
-
-
 
 void ChangeSize(int w, int h)
 {
@@ -170,19 +200,21 @@ void ChangeSize(int w, int h)
 	glLoadIdentity();
 }
 
-int main(int argc, char** argv)
+int main(int argc, char* argv[])
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(800,600);
-	glutCreateWindow("Manual Transformations Demo");
+	glutCreateWindow("OpenGL SphereWorld Demo");
 	glutReshapeFunc(ChangeSize);
 	glutDisplayFunc(RenderScene);
+	glutSpecialFunc(SpecialKeys);
 
 	SetupRC();
 	glutTimerFunc(33, TimerFunction, 1);
 
-	glutMainLoop();;
+	glutMainLoop();
 
 	return 0;
 }
+

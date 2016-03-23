@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E2DD65CC-3D60-4A28-A20A-CF36FE5B4E11}</ProjectGuid>
-    <RootNamespace>My15Transform</RootNamespace>
+    <ProjectGuid>{B09F0E0E-E289-447E-9A26-6C245F8ACF8F}</ProjectGuid>
+    <RootNamespace>My16SphereWorld</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -39,9 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ReferencePath>$(ReferencePath)</ReferencePath>
     <IncludePath>E:\Engine\OpenGL\project\OpenGL_BaoDian\ExerciseCode\include;$(IncludePath)</IncludePath>
-    <LibraryWPath>$(LibraryWPath)</LibraryWPath>
-    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
