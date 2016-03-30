@@ -153,8 +153,6 @@ void SetupRC()
 	glColor3f(0.0f, 0.0f, 0.0f);
 }
 
-
-
 void ChangeSize(int w, int h)
 {
 	// Prevent a divide by zero
